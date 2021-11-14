@@ -5,7 +5,6 @@ import {hideBin} from 'yargs/helpers';
 import {boolean} from "yargs";
 
 export class TerminalPasswordGenerator extends PasswordGenerator {
-
     getOptions(): PasswordOptions {
         const argv = yargs(hideBin(process.argv)).options({
             hasLowerCase: {type: "boolean", default: true},
@@ -18,6 +17,4 @@ export class TerminalPasswordGenerator extends PasswordGenerator {
 
         return new PasswordOptions(argv.hasLowerCase, argv.hasUpperCase, argv.hasNumeric, argv.hasSymbol, argv.length);
     }
-
-
 }
