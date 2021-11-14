@@ -12,7 +12,6 @@ export class TerminalPasswordGenerator extends PasswordGenerator {
             hasNumeric: {type: "boolean", default: true},
             hasSymbol: {type: "boolean", default: true},
             length: {type: "number", default: 16}
-
         }).parseSync();
 
         return new PasswordOptions(argv.hasLowerCase, argv.hasUpperCase, argv.hasNumeric, argv.hasSymbol, argv.length);
