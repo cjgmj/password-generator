@@ -52,7 +52,7 @@ export abstract class PasswordGenerator {
 
         for (let i = 0; i < passwordLength; i++) {
             const availableProviders = providersWithOccurrence
-                .filter(providerWithOccurrence => providerWithOccurrence.maxOccurrence != 0);
+                .filter(providerWithOccurrence => providerWithOccurrence.maxOccurrence !== 0);
             const position = Math.floor(Math.random() * availableProviders.length);
 
             password += availableProviders[position].provider.generateCharacter();
@@ -64,7 +64,7 @@ export abstract class PasswordGenerator {
     }
 }
 
-interface CharacterWithProvider {
+type CharacterWithProvider =  {
     provider: CharacterProvider;
     maxOccurrence: number;
 }
