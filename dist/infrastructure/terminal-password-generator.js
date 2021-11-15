@@ -15,9 +15,10 @@ class TerminalPasswordGenerator extends password_generator_1.PasswordGenerator {
             hasUpperCase: { type: "boolean", default: true },
             hasNumeric: { type: "boolean", default: true },
             hasSymbol: { type: "boolean", default: true },
+            symbols: { type: "string", default: "~!@#$%^&*+-/.,\\{}[]();:|?<>=\"`" },
             length: { type: "number", default: 16 }
         }).parseSync();
-        return new password_options_1.PasswordOptions(argv.hasLowerCase, argv.hasUpperCase, argv.hasNumeric, argv.hasSymbol, argv.length);
+        return new password_options_1.PasswordOptions(argv.hasLowerCase, argv.hasUpperCase, argv.hasNumeric, argv.hasSymbol, argv.symbols, argv.length);
     }
 }
 exports.TerminalPasswordGenerator = TerminalPasswordGenerator;

@@ -2,7 +2,6 @@ import {PasswordGenerator} from "../domain/password-generator";
 import {PasswordOptions} from "../domain/password-options";
 import yargs from "yargs/yargs";
 import {hideBin} from 'yargs/helpers';
-import {boolean} from "yargs";
 
 export class TerminalPasswordGenerator extends PasswordGenerator {
     getOptions(): PasswordOptions {
@@ -11,9 +10,10 @@ export class TerminalPasswordGenerator extends PasswordGenerator {
             hasUpperCase: {type: "boolean", default: true},
             hasNumeric: {type: "boolean", default: true},
             hasSymbol: {type: "boolean", default: true},
+            symbols: {type: "string", default: "~!@#$%^&*+-/.,\\{}[]();:|?<>=\"`"},
             length: {type: "number", default: 16}
         }).parseSync();
 
-        return new PasswordOptions(argv.hasLowerCase, argv.hasUpperCase, argv.hasNumeric, argv.hasSymbol, argv.length);
+        return new PasswordOptions(argv.hasLowerCase, argv.hasUpperCase, argv.hasNumeric, argv.hasSymbol, argv.symbols, argv.length);
     }
 }

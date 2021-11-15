@@ -7,9 +7,10 @@ import {SymbolProvider} from "../application/symbol-provider";
 
 export abstract class PasswordGenerator {
     generate = (): string => {
-        const providerList: CharacterProvider[] = this.getProviderList();
-        const passwordLength: number = this.getOptions().length;
-        const maxOccurrence: number = passwordLength - (providerList.length - 1);
+        const options: PasswordOptions = this.getOptions();
+        const providerList: CharacterProvider[] = this.getProviderList(options);
+        const passwordLength = options.length;
+        const maxOccurrence = passwordLength / providerList.length;
         const providersWithOccurrence: CharacterWithProvider[] = this.getProviderWithOccurrence(providerList, maxOccurrence);
 
         return this.generatePassword(passwordLength, providersWithOccurrence);
@@ -17,8 +18,7 @@ export abstract class PasswordGenerator {
 
     abstract getOptions(): PasswordOptions;
 
-    private getProviderList = (): CharacterProvider[] => {
-        const options = this.getOptions();
+    private getProviderList = (options: PasswordOptions): CharacterProvider[] => {
         const providerList: CharacterProvider[] = [];
 
         if (options.hasLowerCase) {
@@ -34,37 +34,43 @@ export abstract class PasswordGenerator {
         }
 
         if (options.hasSymbol) {
-            providerList.push(new SymbolProvider());
+            options.symbols ? providerList.push(new SymbolProvider(options.symbols)) : providerList.push(new SymbolProvider());
         }
 
         return providerList;
     }
 
-    private getProviderWithOccurrence = (providerList: CharacterProvider[], maxOccurrence: number):
-        { provider: CharacterProvider, maxOccurrence: number }[] => {
-        return providerList.map(provider => {
-            return {provider, maxOccurrence}
-        });
+    private getProviderWithOccurrence = (providerList: CharacterProvider[], maxOccurrence: number): CharacterWithProvider[] => {
+        const providers = providerList.map(provider => ({provider, maxOccurrence: Math.floor(maxOccurrence)}));
+
+        if (maxOccurrence % 1 !== 0) {
+            const position = Math.floor(Math.random() * providers.length);
+            providers[position].maxOccurrence++;
+        }
+
+        return providers;
     }
 
     private generatePassword = (passwordLength: number, providersWithOccurrence: CharacterWithProvider[]): string => {
         let password = "";
+        let availableProviders = [...providersWithOccurrence];
+
 
         for (let i = 0; i < passwordLength; i++) {
-            const availableProviders = providersWithOccurrence
-                .filter(providerWithOccurrence => providerWithOccurrence.maxOccurrence !== 0);
             const position = Math.floor(Math.random() * availableProviders.length);
 
             password += availableProviders[position].provider.generateCharacter();
 
             availableProviders[position].maxOccurrence--;
+            availableProviders = availableProviders
+                .filter(providerWithOccurrence => providerWithOccurrence.maxOccurrence !== 0);
         }
 
         return password;
     }
 }
 
-type CharacterWithProvider =  {
+type CharacterWithProvider = {
     provider: CharacterProvider;
     maxOccurrence: number;
 }
