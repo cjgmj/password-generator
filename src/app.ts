@@ -1,6 +1,5 @@
-import {PasswordGenerator} from "./domain/password-generator";
 import {TerminalPasswordGenerator} from "./infrastructure/terminal-password-generator";
 
-const passwordGenerator: PasswordGenerator = new TerminalPasswordGenerator();
+const terminalPasswordGenerator: TerminalPasswordGenerator = new TerminalPasswordGenerator();
 
-console.log(passwordGenerator.generate());
+console.log(terminalPasswordGenerator.createPassword().getValue());

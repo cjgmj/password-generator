@@ -6,6 +6,8 @@ export class PasswordOptions {
     public readonly symbols: string;
     public readonly length: number;
 
+    private readonly minimum_password_size = 4;
+
     constructor(hasLowerCase: boolean = true,
                 hasUpperCase: boolean = true,
                 hasNumeric: boolean = true,
@@ -17,6 +19,6 @@ export class PasswordOptions {
         this.hasNumeric = hasNumeric;
         this.hasSymbol = hasSymbol;
         this.symbols = symbols;
-        this.length = Math.max(4, length);
+        this.length = Math.max(this.minimum_password_size, length);
     }
 }
