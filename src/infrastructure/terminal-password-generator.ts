@@ -20,7 +20,7 @@ export class TerminalPasswordGenerator {
             hasUpperCase: {type: "boolean", describe: "Password should contain upper cases", default: true},
             hasNumeric: {type: "boolean", describe: "Password should contain numerics", default: true},
             hasSymbol: {type: "boolean", describe: "Password should contain symbol", default: true},
-            symbols: {type: "string", describe: "Symbols provided to create the password", default: "~!@#$%^&*+-/.,\\{}[]();:|?<>=\"`"},
+            symbols: {type: "string", describe: "Symbols that can be included in the password", default: "~!@#$%^&*+-/.,\\{}[]();:|?<>=\"`"},
             length: {type: "number", describe: "Password length", default: 16}
         }).parseSync();
 
