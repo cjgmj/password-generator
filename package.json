@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "compile": "tsc -p tsconfig-build.json",
+    "compile:des": "tsc",
     "start": "node dist/app",
     "test": "tsc && mocha des/test",
     "help": "node dist/app --help"
