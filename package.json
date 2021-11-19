@@ -4,8 +4,9 @@
   "description": "A password generator",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "tsc"
+    "compile": "tsc -p tsconfig-build.json",
+    "start": "npm dist/app",
+    "test": "tsc && mocha des/test"
   },
   "author": "cjgmj",
   "license": "ISC",
@@ -13,7 +14,11 @@
     "yargs": "^17.2.1"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.11.7",
-    "@types/yargs": "^17.0.5"
+    "@types/yargs": "^17.0.5",
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
   }
 }
