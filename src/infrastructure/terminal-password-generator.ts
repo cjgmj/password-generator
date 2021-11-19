@@ -16,12 +16,12 @@ export class TerminalPasswordGenerator {
 
     private createOptions(): PasswordOptions {
         const argv = yargs(hideBin(process.argv)).options({
-            hasLowerCase: {type: "boolean", describe: "Password should contain lower cases", default: true},
-            hasUpperCase: {type: "boolean", describe: "Password should contain upper cases", default: true},
-            hasNumeric: {type: "boolean", describe: "Password should contain numerics", default: true},
-            hasSymbol: {type: "boolean", describe: "Password should contain symbol", default: true},
-            symbols: {type: "string", describe: "Symbols that can be included in the password", default: "~!@#$%^&*+-/.,\\{}[]();:|?<>=\"`"},
-            length: {type: "number", describe: "Password length", default: 16}
+            hasLowerCase: {alias:"hlc", type: "boolean", describe: "Password should contain lower cases", default: true},
+            hasUpperCase: {alias:"huc", type: "boolean", describe: "Password should contain upper cases", default: true},
+            hasNumeric: {alias:"hn", type: "boolean", describe: "Password should contain numerics", default: true},
+            hasSymbol: {alias:"hs", type: "boolean", describe: "Password should contain symbol", default: true},
+            symbols: {alias:"s", type: "string", describe: "Symbols that can be included in the password", default: "~!@#$%^&*+-/.,\\{}[]();:|?<>=\"`"},
+            length: {alias:"l", type: "number", describe: "Password length", default: 16}
         }).parseSync();
 
         return new PasswordOptions(argv.hasLowerCase, argv.hasUpperCase, argv.hasNumeric, argv.hasSymbol, argv.symbols, argv.length);

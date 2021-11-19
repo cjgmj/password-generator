@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "tsc -p tsconfig-build.json",
     "start": "npm dist/app",
-    "test": "tsc && mocha des/test"
+    "test": "tsc && mocha des/test",
+    "help": "node dist/app --help"
   },
   "author": "cjgmj",
   "license": "ISC",
