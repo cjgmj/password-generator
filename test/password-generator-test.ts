@@ -10,8 +10,7 @@ describe("Password generator", () => {
 
         const password: Password = passwordGenerator.execute(options);
 
-        expect(password.getValue()).to.match(/[a-zA-Z0-9~!@#$%^&*+\-\/.,{}[\]();:|?<>="`]/g);
-        expect(password.getValue().length).to.equal(16);
+        expect(password.getValue()).to.match(/[a-z|A-Z|0-9|~!@#$%^&*+\-\/.,\\{}[\]();:\|?<>="`]{16}/g);
     });
 
     it("should return a password without symbols", () => {
@@ -20,8 +19,7 @@ describe("Password generator", () => {
 
         const password: Password = passwordGenerator.execute(options);
 
-        expect(password.getValue()).to.match(/[a-zA-Z0-9]/g);
-        expect(password.getValue().length).to.equal(16);
+        expect(password.getValue()).to.match(/[a-z|A-Z|0-9]{16}/g);
     });
 
     it("should return a password without numeric", () => {
@@ -30,8 +28,7 @@ describe("Password generator", () => {
 
         const password: Password = passwordGenerator.execute(options);
 
-        expect(password.getValue()).to.match(/[a-zA-Z~!@#$%^&*+\-\/.,{}[\]();:|?<>="]/g);
-        expect(password.getValue().length).to.equal(16);
+        expect(password.getValue()).to.match(/[a-z|A-Z|~!@#$%^&*+\-\/.,\\{}[\]();:\|?<>="`]{16}/g);
     });
 
     it("should return a password without upper case", () => {
@@ -40,8 +37,7 @@ describe("Password generator", () => {
 
         const password: Password = passwordGenerator.execute(options);
 
-        expect(password.getValue()).to.match(/[a-z0-9~!@#$%^&*+\-\/.,{}[\]();:|?<>="]/g);
-        expect(password.getValue().length).to.equal(16);
+        expect(password.getValue()).to.match(/[a-z|0-9|~!@#$%^&*+\-\/.,\\{}[\]();:\|?<>="`]{16}/g);
     });
 
     it("should return a password without lower case", () => {
@@ -50,8 +46,7 @@ describe("Password generator", () => {
 
         const password: Password = passwordGenerator.execute(options);
 
-        expect(password.getValue()).to.match(/[A-Z0-9~!@#$%^&*+\-\/.,{}[\]();:|?<>="]/g);
-        expect(password.getValue().length).to.equal(16);
+        expect(password.getValue()).to.match(/[A-Z|0-9|~!@#$%^&*+\-\/.,\\{}[\]();:\|?<>="`]{16}/g);
     });
 
     it("should return a password with custom symbols", () => {
@@ -60,8 +55,7 @@ describe("Password generator", () => {
 
         const password: Password = passwordGenerator.execute(options);
 
-        expect(password.getValue()).to.match(/[A-Z0-9~!@#$%"]/g);
-        expect(password.getValue().length).to.equal(16);
+        expect(password.getValue()).to.match(/[a-z|A-Z|0-9|~!@#$%]{16}/g);
     });
 
     it("should return a password with length four", () => {
@@ -70,8 +64,7 @@ describe("Password generator", () => {
 
         const password: Password = passwordGenerator.execute(options);
 
-        expect(password.getValue()).to.match(/[A-Z0-9~!@#$%"]/g);
-        expect(password.getValue().length).to.equal(4);
+        expect(password.getValue()).to.match(/[a-z|A-Z|0-9|~!@#$%]{4}/g);
     });
 
     it("should return a password with length four as the option length is less than four", () => {
@@ -80,7 +73,6 @@ describe("Password generator", () => {
 
         const password: Password = passwordGenerator.execute(options);
 
-        expect(password.getValue()).to.match(/[A-Z0-9~!@#$%"]/g);
-        expect(password.getValue().length).to.equal(4);
-    })
+        expect(password.getValue()).to.match(/[a-z|A-Z|0-9|~!@#$%]{4}/g);
+    });
 });

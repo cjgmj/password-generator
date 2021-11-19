@@ -42,7 +42,7 @@ export class AvailableProviders {
         }
 
         if (options.hasSymbol) {
-            options.symbols ? providerList.push(new SymbolProvider(options.symbols)) : providerList.push(new SymbolProvider());
+            providerList.push(new SymbolProvider(options.symbols));
         }
 
         return providerList;
