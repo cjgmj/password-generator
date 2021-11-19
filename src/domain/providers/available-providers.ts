@@ -4,11 +4,16 @@ import {LowerCaseProvider} from "../../infrastructure/providers/lower-case-provi
 import {UpperCaseProvider} from "../../infrastructure/providers/upper-case-provider";
 import {NumericProvider} from "../../infrastructure/providers/numeric-provider";
 import {SymbolProvider} from "../../infrastructure/providers/symbol-provider";
-import {CharacterWithProvider} from "./character-provider-occurrence";
+import {CharacterProviderOccurrence} from "./character-provider-occurrence";
 
 export class AvailableProviders {
-    getProviders = (options: PasswordOptions): CharacterWithProvider[] => {
+    getProviders = (options: PasswordOptions): CharacterProviderOccurrence[] => {
         const providerList = this.getProviderList(options);
+
+        if (providerList.length === 0) {
+            throw new Error("At least a provider should be included.");
+        }
+
         const passwordLength = options.length;
         const maxOccurrence = passwordLength / providerList.length;
         const providers = providerList.map(provider => ({provider, maxOccurrence: Math.floor(maxOccurrence)}));

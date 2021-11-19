@@ -1,6 +1,6 @@
 import {PasswordOptions} from "./password-options";
 import {AvailableProviders} from "../domain/providers/available-providers";
-import {CharacterWithProvider} from "../domain/providers/character-provider-occurrence";
+import {CharacterProviderOccurrence} from "../domain/providers/character-provider-occurrence";
 import {Password} from "../domain/password/password";
 
 export class PasswordGenerator {
@@ -12,7 +12,7 @@ export class PasswordGenerator {
 
     execute = (options: PasswordOptions): Password => this.generatePassword(options.length, this.availableProviders.getProviders(options));
 
-    private generatePassword = (passwordLength: number, availableProviders: CharacterWithProvider[]): Password => {
+    private generatePassword = (passwordLength: number, availableProviders: CharacterProviderOccurrence[]): Password => {
         let password = "";
 
         for (let i = 0; i < passwordLength; i++) {

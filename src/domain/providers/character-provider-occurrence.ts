@@ -1,6 +1,6 @@
 import {CharacterProvider} from "./character-provider";
 
-export type CharacterWithProvider = {
+export type CharacterProviderOccurrence = {
     provider: CharacterProvider;
     maxOccurrence: number;
 }
